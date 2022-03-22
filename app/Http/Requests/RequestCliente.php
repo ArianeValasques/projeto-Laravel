@@ -28,8 +28,8 @@ class RequestCliente extends FormRequest
         if($this->method() == "PUT"){
             return [
                 'nome' => ['required', 'string', 'max:255','regex:/^([a-zA-Zà-úÀ-Ú]|-|_|\s)+$/'],
-                'cpf' => ['required', 'numeric'],
-                'telefone' => ['required', 'string'],
+                'cpf' => ['required', 'string', 'regex:/^([0-9]|-|-|-|.|\s)+$/'],
+                'telefone' => ['required', 'string', 'regex:/^([0-9]|-|-|-|.|\s)+$/'],
                 'nascimento' => ['required', 'date'],
                 'email' => ['required', 'string', 'max:255']
             ];
@@ -38,8 +38,8 @@ class RequestCliente extends FormRequest
         if($this->method() == "POST"){
             return [
                 'nome' => ['required', 'string', 'max:255','regex:/^([a-zA-Zà-úÀ-Ú]|-|_|\s)+$/'],
-                'cpf' => ['required', 'numeric'],
-                'telefone' => ['required', 'string'],
+                'cpf' => ['required', 'string', 'regex:/^([0-9]|-|-|-|.|\s)+$/'],
+                'telefone' => ['required', 'string', 'regex:/^([0-9]|-|-|-|.|\s)+$/'],
                 'nascimento' => ['required', 'date'],
                 'email' => ['required', 'string', 'max:255']
             ];

@@ -1,10 +1,16 @@
 @extends('layouts.app')
 @section('htmlheader_titulo', 'Editar Cliente')
-
 @section('scripts_adicionais')
-  
+  <script type="text/javascript" src=" {{asset('plugins/maskedinput/jquery.maskedinput.min.js')}}"></script>
+  <script  type="text/javascript" >
+    $(document).ready( function($){
+        $("#cpf").mask("999.999.999-99");
+    }); 
+    $(document).ready( function($){
+        $("#telefone").mask("99-99999-9999");
+    });    
+  </script>
 @endsection
-
 @section('conteudo')
   <div class="card">
     <div class="card-body">
@@ -38,7 +44,7 @@
             </div>
             <div class="form-group col-2">
               <label>CPF</label><br>
-              <input type="text" name='cpf' value="{{$cliente->cpf}}" class="form-control  @error('cpf') is-invalid @enderror" value="{{ old('cpf') }}"><br>
+              <input type="text" id='cpf' name='cpf' value="{{$cliente->cpf}}" class="form-control  @error('cpf') is-invalid @enderror" value="{{ old('cpf') }}"><br>
                 @error('cpf')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{$message}}</strong>
@@ -47,7 +53,7 @@
             </div>
             <div class="form-group col-2">
               <label>Telefone</label><br>
-              <input type="text" name='telefone' value="{{$cliente->telefone}}" class="form-control @error('telefone') is-invalid @enderror" value="{{ old('telefone') }}"><br>
+              <input type="text" id='telefone' name='telefone' value="{{$cliente->telefone}}" class="form-control @error('telefone') is-invalid @enderror" value="{{ old('telefone') }}"><br>
                 @error('telefone')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{$message}}</strong>

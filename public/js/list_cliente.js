@@ -1,6 +1,5 @@
 $(document).ready(function ($) {
     base_url = window.location.origin;
-    console.log(base_url);
     var table = $("#clientes").DataTable({
         ajax: base_url + "/cliente/show",
         serverSide: true,
@@ -20,67 +19,24 @@ $(document).ready(function ($) {
     });
 
     $(document).on("click", ".btnExcluir", function () {
-        var nome = $(this).data("nome");
-        var id = $(this).data("id");
-
-        swalWithBootstrapButtons
-            .fire({
-                title:
-                    "Tem certeza que deseja excluir o cliente: " + nome + "?",
-                text: "",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Sim, quero excluir!",
-                cancelButtonText: "Não, Cancelar!",
-                reverseButtons: true,
-            })
-            .then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        type: "delete",
-                        url: "cliente/" + id,
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            ),
-                        },
-                        data: {},
-                        success: function (data) {
-                            if (data.erro) {
-                                swalWithBootstrapButtons.fire(
-                                    "Atenção",
-                                    "Exclusão cancelada, tente novamente mais tarde.",
-                                    "error"
-                                );
-                            } else {
-                                swalWithBootstrapButtons
-                                    .fire(
-                                        "Sucesso",
-                                        "Exclusão Realizada",
-                                        "success"
-                                    )
-                                    .then(function (result) {
-                                        if (result.value) {
-                                            $("#table").DataTable().draw(false);
-                                        }
-                                    });
-                            }
-                        },
-                        error: function () {
-                            swalWithBootstrapButtons.fire(
-                                "Atenção",
-                                "Exclusão cancelada, tente novamente mais tarde.",
-                                "error"
-                            );
-                        },
-                    });
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire(
-                        "Atenção",
-                        "Exclusão cancelada, tente novamente mais tarde.",
-                        "error"
-                    );
-                }
-            });
+        id = $(this).data("id");
+        console.log(id);
+        $.ajax({
+            type: "delete",
+            url: base_url + "/cliente/" + id,
+            dataType: "json",
+            crossDomain: true,
+            contentType: "application/json",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                //alert("Não foi possível excluir!");
+                location.reload();
+            },
+        });
     });
 });

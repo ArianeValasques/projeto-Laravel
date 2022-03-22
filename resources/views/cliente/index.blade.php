@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="{{asset('css/datatables.min.css')}}">
 @endsection
 @section('scripts_adicionais')
-  <script src="{{asset('plugins/datatables/datatables.min.js')}}"></script>
+  <script src="{{asset('plugins\AdminLTE-3.2.0-rc\plugins\datatables\datatables.min.js')}}"></script>
   <script type="text/javascript" src="{{ asset('js/list_cliente.js') }}"></script>
 @endsection
 @section('conteudo')
